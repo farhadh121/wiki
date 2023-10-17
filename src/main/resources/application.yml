@@ -1,0 +1,31 @@
+# ... all properties above remain untouched
+# For educational purposes we will show the SQL in console
+# spring.jpa.show-sql=true <- it's time to remove this
+# Gamification service URL <-- We remove this block
+# service.gamification.host=http://localhost:8081
+amqp:
+    exchange:
+        attempts: attempts.topic
+# Shows declaration of exchanges, queues, bindings, etc.
+logging:
+    level:
+        org.springframework.amqp.rabbit.core.RabbitAdmin: DEBUG
+
+spring:
+    cloud:
+        stream:
+            bindings:
+                input-channel-1:
+                    destination: users
+            kafka:
+                streams:
+                    binder:
+                        applicationId: wikiStream
+                        brokers: localhost:9092
+                        configuration:
+                            default:
+                                key:
+                                    serde: org.apache.kafka.common.serialization.Serde$StringSerde
+                                value:
+                                    serde: org.apache.kafka.common.serialization.Serde$StringSerde
+                            

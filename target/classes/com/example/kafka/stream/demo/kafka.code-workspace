@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../../../../../../Downloads/kafka"
+		},
+		{
+			"name": "demo",
+			"path": "../../../../../../../.."
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
