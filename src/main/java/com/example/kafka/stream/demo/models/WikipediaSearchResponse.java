@@ -19,7 +19,7 @@ import lombok.Setter;
 @JsonDeserialize(using = WikiSearchResultDeserializer.class)
 public class WikipediaSearchResponse {
 
-    private String searcgQuery;
+    private String searchQuery;
     List<String> pageTitles;
     List<String> emplyList;
     List<String> urls;

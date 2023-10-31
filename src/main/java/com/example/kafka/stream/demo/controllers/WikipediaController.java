@@ -37,7 +37,7 @@ public class WikipediaController {
     }
 
     @GetMapping("/page/links/{pageId}")
-    public List<WikipediaLinks> getPageLinklsByPageId(@PathVariable Integer pageId) throws JsonMappingException, JsonProcessingException {
+    public WikipediaLinks getPageLinklsByPageId(@PathVariable Integer pageId) throws JsonMappingException, JsonProcessingException {
         return wikipediaService.getwikipageLinks(pageId);
     }
 }

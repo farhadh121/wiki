@@ -16,6 +16,7 @@ import com.example.kafka.stream.demo.models.WikipediaSearchResultDto;
 import com.example.kafka.stream.demo.models.WikipediaTitleSearchResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -73,14 +74,18 @@ private final RestTemplate restTemplate;
         return response;
     }
 
-    public  List<WikipediaLinks> getwikipageLinks(final Integer pageId) throws JsonMappingException, JsonProcessingException {
+    public WikipediaLinks getwikipageLinks(final Integer pageId) throws JsonMappingException, JsonProcessingException {
     
         String apiUrl = WIKIPEDIA_API_URL + "?action=query&format=json&pageids=" + pageId +"&prop=links";
-           ParameterizedTypeReference<List<WikipediaLinks>> responseType = new ParameterizedTypeReference<List<WikipediaLinks>>() {
-        };
+        //    ParameterizedTypeReference<List<WikipediaLinks>> responseType = new ParameterizedTypeReference<List<WikipediaLinks>>() {
+        // };
+
         String jsonString = restTemplate.getForObject(apiUrl, String.class);
-        List<WikipediaLinks> response = objectMapper.readValue(jsonString, new TypeReference<List<WikipediaLinks>>() {});
-        System.out.println("URL " + response.get(0).getTitle());
+        System.out.println("JSON RESPNSE " +jsonString);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        WikipediaLinks response = objectMapper.readValue(jsonString, WikipediaLinks.class);
+        // System.out.println("URL " + response.get(0).getTitle());
         
         return response;
         
